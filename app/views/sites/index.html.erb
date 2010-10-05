@@ -1,0 +1,23 @@
+
+
+<h1>Listado de ficheros</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sites.each do |site| %>
+  <tr>
+    <td><%= link_to 'Ver', site %></td>
+    <td><%= link_to 'Editar', edit_site_path(site) %></td>
+    <td><%= link_to 'Borrar', site, :confirm => 'estas seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo fichero', new_site_path %>

@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag(@site.attachment_url) if @site.attachment? %>
+<%= link_to_if(@site.attachment?, "Descargar fichero", @site.attachment_url) %>
+
+<%= link_to 'Editar', edit_site_path(@site) %> |
+<%= link_to 'Volver', sites_path %>
