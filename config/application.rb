@@ -38,11 +38,5 @@ module Procarrierwave
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
-    # Add additional load paths for your own custom dirs
-    config.autoload_paths += %W(#{config.root}/app/middleware/)
-    # %w(observers mailers middleware).each do |dir|
-#       config.autoload_paths << "#{config.root}/app/#{dir}"
-#     end
   end
 end
