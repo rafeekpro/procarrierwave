@@ -1,5 +1,45 @@
 <h1>Nuevo fichero</h1>
 
+  	<%- session_key_name = Rails.application.config.session_options[:key] -%>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		   $('#fileInput2').uploadify({
+		    'script' 		  : '<%= url_for @site %>',
+            'uploader'        : '/uploadify/uploadify.swf',
+      		'cancelImg'       : '/uploadify/cancel.png',
+      		'fileDataName'	  :  'site[attachment]',
+      		'fileDesc'        : 'Photo or Video',
+      		'fileExt'         : '*.mov;*.mp4;*.avi;*.wmv;*.png;*.jpg;*.gif',
+      		'auto'            : true,
+      		'sizeLimit'       : <%= 100.megabytes %>,
+      		'width'           : 180,
+      		'height'          : 35,
+      		'hideButton'      : false,
+      		'wmode'           : 'transparent',
+      		'buttonText'      : 'Ficheros',
+            'onError'		  : function (a, b, c, d) {
+						         if (d.status == 404)
+						            alert('Could not find upload script. Use a path relative to: '+'<?= getcwd() ?>');
+						         else if (d.type === "HTTP")
+						            alert('error '+d.type+": "+d.status);
+						         else if (d.type ==="File Size")
+						            alert(c.name+' '+d.type+' Limit: '+Math.round(d.sizeLimit/1024)+'KB');
+						         else
+						            alert('error '+d.type+": "+d.text);
+									},      
+      		'queueID'         : 'fileQueue',
+	  		'auto'            : true,
+	  		'multi'           : true,
+		    'scriptData' 	  : {
+							        '_http_accept': 'application/javascript',
+							        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+							        'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+							      }
+
+		  });  
+		});
+	</script>
+
 <%= render 'form' %>
 
 <%= link_to 'Volver', sites_path %>
